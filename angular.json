@@ -31,10 +31,10 @@
             ],
             "styles": [
               "node_modules/ngx-spinner/animations/ball-scale-multiple.css",
-              "../app/node_modules/@fortawesome/fontawesome-free/css/all.css",
+              "node_modules/@fortawesome/fontawesome-free/css/all.css",
               "src/styles.scss"
             ],
-            "scripts": ["../app/node_modules/flowbite/dist/flowbite.min.js"],
+            "scripts": ["node_modules/flowbite/dist/flowbite.min.js"],
             "server": "src/main.server.ts",
             "outputMode": "server",
             "ssr": {
@@ -94,10 +94,10 @@
             ],
             "styles": [
               "node_modules/ngx-spinner/animations/ball-scale-multiple.css",
-              "../app/node_modules/@fortawesome/fontawesome-free/css/all.css",
+              "node_modules/@fortawesome/fontawesome-free/css/all.css",
               "src/styles.scss"
             ],
-            "scripts": ["../app/node_modules/flowbite/dist/flowbite.min.js"]
+            "scripts": ["node_modules/flowbite/dist/flowbite.min.js"]
           }
         }
       }
