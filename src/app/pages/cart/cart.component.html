@@ -8,9 +8,11 @@
       🗑 Clear Cart
     </button>
     <span class="text-green-600 text-2xl">
-      Total Cart Price : {{ cardDetails.totalCartPrice | currency : "GBP" }}
+      Total Cart Price : 
+      {{ cardDetails?.totalCartPrice ? (cardDetails.totalCartPrice | currency : "GBP") : '0.00' }}
     </span>
   </div>
+  
 
   @if (cardDetails.products.length > 0) {
   <!-- @for (item of items;  {} -->
