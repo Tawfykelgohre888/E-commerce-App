@@ -1,0 +1,35 @@
+<section class="w-1/2 bg-white shadow-lg rounded-xl p-10 mx-auto mt-10">
+    <h1 class="text-center text-green-600 text-4xl font-extrabold mb-6">Checkout</h1>
+  
+    <form [formGroup]="cheakOutForm" class="space-y-6" (ngSubmit)="submitForm()" >
+      <div>
+        <label for="details" class="block mb-2 text-lg font-semibold text-gray-700">Details</label>
+        <textarea id="details" formControlName="details"
+          class="w-full h-24 bg-gray-100 border border-gray-300 text-gray-900 text-base rounded-lg focus:ring-green-500 focus:border-green-500 p-3 shadow-md transition-all duration-300"></textarea>
+      </div>
+  
+      <div>
+        <label for="phone" class="block mb-2 text-lg font-semibold text-gray-700">Phone</label>
+        <input type="tel" id="phone" formControlName="phone"
+          class="w-full bg-gray-100 border border-gray-300 text-gray-900 text-base rounded-lg focus:ring-green-500 focus:border-green-500 p-3 shadow-md transition-all duration-300">
+      </div>
+  
+      <div>
+        <label for="city" class="block mb-2 text-lg font-semibold text-gray-700">City</label>
+        <input type="text" id="city" formControlName="city"
+          class="w-full bg-gray-100 border border-gray-300 text-gray-900 text-base rounded-lg focus:ring-green-500 focus:border-green-500 p-3 shadow-md transition-all duration-300">
+      </div>
+  
+      <button
+      [disabled]="cheakOutForm.invalid"
+      class="relative w-full flex items-center justify-center gap-3 bg-gradient-to-r from-blue-500 to-indigo-600 text-white font-bold text-xl py-4 px-6 rounded-2xl shadow-xl transition duration-300 ease-in-out 
+      hover:scale-105 hover:shadow-2xl 
+      disabled:opacity-50 disabled:cursor-not-allowed">
+      
+      <span class="text-2xl">💳</span> Pay Online
+      <div class="absolute inset-0 bg-white opacity-10 rounded-2xl transition-all duration-500 hover:opacity-0"></div>
+    </button>
+    
+    </form>
+  </section>
+  

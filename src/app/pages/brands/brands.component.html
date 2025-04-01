@@ -1,0 +1,27 @@
+<section class=" mx-auto rounded-lg my-[100px]">
+    <h2 class="text-green-600 font-medium text-[40px] text-center my-6">
+      All Brands
+    </h2>
+    <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
+      @for (brand of brandsData; track brand._id) {
+      <div
+        class="max-w-sm hover:shadow-green-400 bg-white border border-gray-200 rounded-lg hover:shadow-md transition-all duration-500 dark:bg-gray-800 dark:border-gray-700"
+      >
+        <img
+          class="rounded-t-lg h-[200px] w-full"
+          [src]="brand.image"
+          [alt]="brand.name"
+        />
+  
+        <div class="p-5">
+          <h2
+            class="mb-2 text-2xl text-center capitalize tracking-tight dark:text-white"
+          >
+            {{ brand.name }}
+          </h2>
+        </div>
+      </div>
+      }
+    </div>
+  </section>
+  

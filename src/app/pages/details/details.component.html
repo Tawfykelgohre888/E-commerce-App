@@ -1,0 +1,55 @@
+@if(detailsProduct){
+<section class="container mx-auto my-10 p-6 bg-white shadow-lg rounded-lg">
+  <h2 class="text-2xl font-bold text-gray-800 mb-6">Product Details</h2>
+
+  <div class="flex flex-col md:flex-row items-center md:items-start gap-6">
+    <div class="md:w-3/12 w-full">
+      <img
+        class="w-full h-auto object-cover rounded-lg shadow-md"
+        [src]="detailsProduct.imageCover"
+        [alt]="detailsProduct.title"
+      />
+    </div>
+
+    <div class="md:w-9/12 w-full space-y-4">
+      <h2 class="text-3xl font-semibold text-gray-900">
+        {{ detailsProduct.title }}
+      </h2>
+      <p class="text-gray-600 leading-relaxed">
+        {{ detailsProduct.description }}
+      </p>
+
+      <h3 class="text-lg font-medium text-gray-700">
+        Category:
+        <span class="text-blue-600 font-semibold">{{
+          detailsProduct.category.name
+        }}</span>
+      </h3>
+
+      <div class="bg-gray-100 p-4 rounded-lg shadow-md">
+        <h3 class="text-xl font-medium text-gray-800">
+          {{ detailsProduct.title.split(" ", 2).join(" ") }}
+        </h3>
+        <div class="flex justify-between items-center mt-3">
+          <span class="text-lg font-bold text-green-600"
+            >{{ detailsProduct.price }} EGP</span
+          >
+          <div class="flex items-center space-x-1">
+            <i class="fas fa-star text-yellow-400"></i>
+            <span class="text-gray-600 font-medium">
+              {{ detailsProduct.ratingsAverage }}
+            </span>
+          </div>
+        </div>
+      </div>
+
+      <button
+      (click)="addToCart(detailsProduct._id)"
+        class="bg-green-600 hover:bg-green-700 transition text-white py-3 px-6 rounded-lg w-full text-lg font-semibold shadow-md"
+      >
+        ADD TO CART
+      </button>
+    </div>
+  </div>
+</section>
+}

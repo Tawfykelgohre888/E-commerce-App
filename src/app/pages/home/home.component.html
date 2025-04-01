@@ -1,0 +1,86 @@
+<!-- Main Slider -->
+<section class="mt-20" >
+  <div class="grid md:grid-cols-[70%_minmax(0,1fr)]">
+    <div>
+      <owl-carousel-o [options]="customMainSlider">
+        <ng-template carouselSlide>
+          <img src="/images/img1.avif" class="w-full h-[400px]" alt="" />
+        </ng-template>
+        <ng-template carouselSlide>
+          <img src="/images/img2.avif" class="w-full h-[400px]" alt="" />
+        </ng-template>
+        <ng-template carouselSlide>
+          <img src="/images/img3.avif" class="w-full h-[400px]" alt="" />
+        </ng-template>
+        <ng-template carouselSlide>
+          <img src="/images/img4.avif" class="w-full h-[400px]" alt="" />
+        </ng-template>
+        <ng-template carouselSlide>
+          <img src="/images/img5.avif" class="w-full h-[400px]" alt="" />
+        </ng-template>
+        <ng-template carouselSlide>
+          <img src="/images/img6.avif" class="w-full h-[400px]" alt="" />
+        </ng-template>
+        <ng-template carouselSlide>
+          <img src="/images/img7.avif" class="w-full h-[400px]" alt="" />
+        </ng-template>
+      </owl-carousel-o>
+    </div>
+    <div>
+      <img src="/images/grocery-banner.png" class="w-full h-[200px]" alt="" />
+      <img
+        src="/images/grocery-banner-2.jpeg"
+        class="w-full h-[200px]"
+        alt=""
+      />
+    </div>
+  </div>
+</section>
+<!-- Categories Slider -->
+<section>
+  <h2>Shop Popular Categories</h2>
+  <owl-carousel-o [options]="customOptions">
+    @for (cat of categories(); track cat._id ) {
+    <ng-template carouselSlide>
+      <img [src]="cat.image" class="w-full h-[250px]" [alt]="cat.name" />
+      <h3>{{ cat.name }}</h3>
+    </ng-template>
+    }
+  </owl-carousel-o>
+</section>
+<!-- Show All Products -->
+<section>
+  <h1 class="font-bold text-4xl">Popular Products</h1>
+  <div class="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-10">
+    @for (pro of Product() ; track pro.id) {
+    <div
+      class="card border border-green-400/50 rounded-md overflow-hidden shadow relative"
+    >
+      <div class="card-img" [routerLink]="['/details', pro.id]">
+        <img
+          [src]="pro.imageCover"
+          class="w-full h-[250px] object-contain"
+          [alt]="pro.title"
+        />
+      </div>
+      <div class="card-body px-2 py-4">
+        <h4 class="text-green-500 text-xs">{{ pro.category.name }}</h4>
+        <h3 class="font-medium">{{ pro.title.split(" ", 2).join(" ") }}</h3>
+        <div class="flex justify-between items-center">
+          <span>{{ pro.price }} EGP</span>
+          <div class="flex items-center">
+            <i class="fas fa-star text-yellow-300"></i>
+            <span class="text-gray-500"> {{ pro.ratingsAverage }} </span>
+          </div>
+        </div>
+      </div>
+      <button
+      (click)="addToCart(pro.id)"
+        class="bg-green-600 text-white py-2 px-10 border rounded w-[90%] mx-auto block"
+      >
+        ADD TO CART
+      </button>
+    </div>
+    }
+  </div>
+</section>

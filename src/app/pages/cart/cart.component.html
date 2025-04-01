@@ -1,0 +1,85 @@
+<section class="bg-gray-50 rounded shadow mt-20">
+  <h2 class="text-green-500 text-4xl text-center pt-2">SHOP CART :</h2>
+  <div class="flex flex-row-reverse justify-between items-center w-full">
+    <button
+      (click)="clearItem()"
+      class="bg-gray-50 font-semibold py-2 px-4 rounded-md shadow-md border-2 border-red-500 hover:border-white text-red-500 hover:text-white hover:bg-red-600 hover:shadow-lg transition duration-200 ease-in-out"
+    >
+      🗑 Clear Cart
+    </button>
+    <span class="text-green-600 text-2xl">
+      Total Cart Price : {{ cardDetails.totalCartPrice | currency : "GBP" }}
+    </span>
+  </div>
+
+  @if (cardDetails.products.length > 0) {
+  <!-- @for (item of items;  {} -->
+  @for (prod of cardDetails.products; track prod.product._id) {
+  <div class="grid md:grid-cols-[10%_minmax(0,1fr)]">
+    <div>
+      <img
+        [src]="prod.product.imageCover"
+        class="w-full h-[100px] object-contain"
+        [alt]="prod.product.title"
+      />
+    </div>
+
+    <div class="flex justify-between items-center p-2">
+      <!-- info -->
+      <div>
+        <h3>title: {{ prod.product.title }}</h3>
+        <h4 class="text-green-500">
+          price: {{ prod.price | currency : "GBP" }}
+        </h4>
+        <button (click)="removeCartItem(prod.product._id)" class="text-red-500">
+          <i class="fa-solid fa-trash text-red-600"></i> Remove
+        </button>
+      </div>
+
+      <!-- buuton -->
+      <div class="flex items-center gap-4">
+        <button>
+          <i
+            (click)="updateProduct(prod.product._id, prod.count + 1)"
+            class="fa-solid fa-plus border text-green-500 p-2 rounded border-green-500"
+          ></i>
+        </button>
+        <span> {{ prod.count }} </span>
+        <button>
+          <i
+            (click)="updateProduct(prod.product._id, prod.count - 1)"
+            class="fa-solid fa-minus border text-green-500 p-2 rounded border-green-500"
+          ></i>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <a
+    routerLink="/checkout"
+    class="bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-6 rounded-lg shadow-lg flex items-center gap-2 transition-all duration-300"
+  >
+    <i class="fa-solid fa-credit-card"></i>
+    Checkout
+  </a>
+
+  } } @else {
+  <div class="text-center py-12 animate-fadeIn">
+    <i
+      class="fa-solid fa-cart-shopping text-gray-400 text-8xl animate-bounce"
+    ></i>
+    <h3 class="text-gray-500 text-3xl font-semibold mt-4">
+      Your cart is empty 😢
+    </h3>
+    <p class="text-gray-400 mt-2 text-lg">
+      Looks like you haven't added anything yet.
+    </p>
+    <a
+      routerLink="/product"
+      class="mt-6 inline-block bg-blue-500 hover:bg-blue-600 text-white font-bold py-3 px-6 rounded-lg shadow-lg transition-all duration-300"
+    >
+      <i class="fa-solid fa-arrow-left"></i> Back to Shop
+    </a>
+  </div>
+  }
+</section>
