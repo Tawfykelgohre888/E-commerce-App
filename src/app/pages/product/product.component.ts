@@ -7,10 +7,12 @@ import { ToastrService } from 'ngx-toastr';
 import { Iproduct } from '../../shared/interfaces/iproduct';
 import { Icategories } from '../../shared/interfaces/icategories';
 import { RouterLink } from '@angular/router';
+import { SearchPipe } from '../../core/search.pipe';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-product',
-  imports: [RouterLink],
+  imports: [RouterLink,  SearchPipe, FormsModule ],
   templateUrl: './product.component.html',
   styleUrl: './product.component.scss',
 })
@@ -29,6 +31,8 @@ export class ProductComponent {
   categories: WritableSignal<Icategories[]> = signal([]);
 
   cartItem: any = {};
+
+  text: string = '';
 
   customMainSlider: OwlOptions = {
     loop: true,

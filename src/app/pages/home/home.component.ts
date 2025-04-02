@@ -13,10 +13,12 @@ import { Icategories } from '../../shared/interfaces/icategories';
 import { RouterLink } from '@angular/router';
 import { CartService } from '../../core/service/cart/cart.service';
 import { ToastrService } from 'ngx-toastr';
+import { SearchPipe } from '../../core/search.pipe';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-home',
-  imports: [CarouselModule, RouterLink],
+  imports: [CarouselModule, RouterLink, SearchPipe, FormsModule],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss',
 })
@@ -35,6 +37,7 @@ export class HomeComponent implements OnInit {
   categories: WritableSignal<Icategories[]> = signal([]);
 
   cartItem: any = {};
+  text: string = '';
 
   customMainSlider: OwlOptions = {
     loop: true,
@@ -82,13 +85,13 @@ export class HomeComponent implements OnInit {
       next: (res) => {
         this.Product.set(res.data);
         // this.cartService.cartCount.next(res.numOfCartItems);
-      }
+      },
     });
   }
   getCategoriesData(): void {
     this.categoriesService.getAllCategories().subscribe({
       next: (res) => {
-        this.categories.set(res.data)
+        this.categories.set(res.data);
       },
     });
   }
@@ -106,7 +109,7 @@ export class HomeComponent implements OnInit {
         // console.log(this.cartService.cartCount);
 
         this.toastrService.success(res.message, 'FRESH Cart');
-      }
+      },
     });
   }
 }

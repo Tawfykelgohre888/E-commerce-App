@@ -11,13 +11,14 @@
             </svg>
         </button>
         <div class="flex-grow hidden w-full md:flex md:w-auto" id="navbar-default">
-            @if (isLogin) {
             <ul
-                class="capitalize font-medium flex flex-col p-4 md:p-0 mt-4 border  rounded-lg md:flex-row md:space-x-1 rtl:space-x-reverse md:mt-0 md:border-0  dark:bg-gray-300 md:dark:bg-gray-300 dark:border-gray-700">
-                <li>
-                    <a routerLink="/home" routerLinkActive="bg-green-600 rounded-lg text-white "
-                        class="block ml-10 py-2 px-3 text-gray-600" aria-current="page">home</a>
-                </li>
+            class="capitalize font-medium flex flex-col p-4 md:p-0 mt-4 border  rounded-lg md:flex-row md:space-x-1 rtl:space-x-reverse md:mt-0 md:border-0  dark:bg-gray-300 md:dark:bg-gray-300 dark:border-gray-700">
+            <li>
+                <a routerLink="/home" routerLinkActive="bg-green-600 rounded-lg text-white "
+                    class="block ml-10 py-2 px-3 text-gray-600" aria-current="page">home</a>
+            </li>
+            @if (isLogin) {
+
                 <li>
                     <a routerLink="/product" routerLinkActive="bg-green-600 rounded-lg text-white "
                         class="block py-2 px-3 text-gray-600" aria-current="page">product</a>
@@ -29,9 +30,9 @@
                 <li>
                     <a routerLink="/brands" routerLinkActive="bg-green-600 rounded-lg text-white "
                         class="block py-2 px-3 text-gray-600" aria-current="page">brands</a>
-                </li>
-            </ul>
-            }
+                    </li>
+                }
+                </ul>
             <ul
                 class="ms-auto capitalize font-medium flex flex-col p-2 md:p-0 mt-4 border  rounded-lg md:flex-row md:space-x-0 rtl:space-x-reverse md:mt-0 md:border-0  dark:bg-gray-300 md:dark:bg-gray-300 dark:border-gray-700">
                 <li>
@@ -85,7 +86,7 @@
                 <li>
                     <a (click)="authService .logOut()" role="button" class="block py-2 px-3 text-gray-600" aria-current="page">logout</a>
                 </li>
-                }
+            }
             </ul>
         </div>
     </div>

@@ -50,9 +50,10 @@
 </section>
 <!-- Show All Products -->
 <section>
-  <h1 class="font-bold text-4xl">Popular Products</h1>
+  <h2 class="font-bold text-4xl">Popular Products</h2>
+  <input [(ngModel)]="text" type="search"   class="px-4 py-2 my-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 w-full"  placeholder="Search By Name" >
   <div class="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-10">
-    @for (pro of Product() ; track pro.id) {
+    @for (pro of Product() | search : text ; track pro.id) {
     <div
       class="card border border-green-400/50 rounded-md overflow-hidden shadow relative"
     >
