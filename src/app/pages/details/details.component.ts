@@ -6,7 +6,7 @@ import { CartService } from '../../core/service/cart/cart.service';
 @Component({
   selector: 'app-details',
   templateUrl: './details.component.html',
-  styleUrls: ['./details.component.scss']
+  styleUrls: ['./details.component.scss'],
 })
 export class DetailsComponent implements OnInit {
   private readonly activatedRoute = inject(ActivatedRoute);
@@ -19,14 +19,14 @@ export class DetailsComponent implements OnInit {
     // Subscription to the route params
     this.activatedRoute.paramMap.subscribe({
       next: (params) => {
-        const idProduct = params.get('id') ?? '';  // Get the product ID from the URL
+        const idProduct = params.get('id') ?? ''; // Get the product ID from the URL
         if (idProduct) {
-          this.fetchProductDetails(idProduct);  // Fetch product details if ID is valid
+          this.fetchProductDetails(idProduct); // Fetch product details if ID is valid
         }
       },
       error: (err) => {
         console.log('Error while reading route params:', err);
-      }
+      },
     });
   }
 
@@ -34,11 +34,11 @@ export class DetailsComponent implements OnInit {
     // Fetch the product details using the product service
     this.productsService.getspecificProducts(idProduct).subscribe({
       next: (response) => {
-        this.detailsProduct = response.data;  // Store the product details
+        this.detailsProduct = response.data; // Store the product details
       },
       error: (err) => {
         console.log('Error fetching product details:', err);
-      }
+      },
     });
   }
 
@@ -52,7 +52,7 @@ export class DetailsComponent implements OnInit {
       error: (err) => {
         console.log('Error adding product to cart:', err);
         // Optionally: Show an error message to the user
-      }
+      },
     });
   }
 }

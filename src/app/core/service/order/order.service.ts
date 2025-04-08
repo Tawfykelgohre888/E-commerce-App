@@ -30,7 +30,7 @@ export class OrderService {
     );
   }
 
-  getUserOrdee(id: string): Observable<any> {
+  getUserOrder(id: string): Observable<any> {
     return this.httpClient.get(
       `https://ecommerce.routemisr.com/api/v1/orders/user/${id}`
     );
@@ -41,7 +41,7 @@ export class OrderService {
     shippingAddress: { details: string; phone: number; city: string }
   ): Observable<any> {
     return this.httpClient.post(
-      `https://ecommerce.routemisr.com/api/v1/orders/checkout-session/${id}?url=http://localhost:3000`,
+      `https://ecommerce.routemisr.com/api/v1/orders/checkout-session/${id}?url=http://localhost:4200`,
       { shippingAddress },
       {
         headers: {

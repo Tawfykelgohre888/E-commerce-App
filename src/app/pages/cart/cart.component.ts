@@ -98,16 +98,13 @@ export class CartComponent implements OnInit {
     this.cartService.clearCart().subscribe({
       next: (res) => {
         console.log(res);
-        this.cardDetails = {} as Icart;
         this.cartService.cartCount.set(0);
-// Using NgZone to ensure updates within Angular's Zone
-        this.ngZone.run(() => {
-          this.changeDetectorRef.detectChanges();
-        });
+        this.getLoggedCart();
       },
       error: (err) => {
         console.error('Error scanning shopping cart:', err);
       },
     });
   }
+  
 }

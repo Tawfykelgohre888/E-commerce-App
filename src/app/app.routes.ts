@@ -1,3 +1,4 @@
+import { AllOrdersComponent } from './pages/all-orders/all-orders.component';
 import { Routes } from '@angular/router';
 import { AuthLayoutComponent } from './layout/auth-layout/auth-layout.component';
 import { BlankLayoutComponent } from './layout/blank-layout/blank-layout.component';
@@ -17,13 +18,14 @@ export const routes: Routes = [
     
     {
         path: "", component: BlankLayoutComponent, children: [
-            { path: "home", loadComponent: () => import('./pages/home/home.component').then(m => m.HomeComponent), title: "Home" }, // Home بدون authGuard
-            { path: "product", loadComponent: () => import('./pages/product/product.component').then(m => m.ProductComponent), title: "Product", canActivate: [authGuard] },
-            { path: "categories", loadComponent: () => import('./pages/categories/categoris.component').then(m => m.CategorisComponent), title: "Categories", canActivate: [authGuard] },
-            { path: "brands", loadComponent: () => import('./pages/brands/brands.component').then(m => m.BrandsComponent), title: "Brands", canActivate: [authGuard] },
-            { path: "cart", loadComponent: () => import('./pages/cart/cart.component').then(m => m.CartComponent), title: "Cart", canActivate: [authGuard] },
-            { path: "details/:id", loadComponent: () => import('./pages/details/details.component').then(m => m.DetailsComponent), title: "Details", canActivate: [authGuard] },
-            { path: "checkout", loadComponent: () => import('./pages/checkout/checkout.component').then(m => m.CheckoutComponent), title: "Checkout", canActivate: [authGuard] },
+            { path: "home", loadComponent: () => import('./pages/home/home.component').then(m => m.HomeComponent), title: "Home",canActivate:[authGuard] }, // Home not authGuard
+            { path: "product", loadComponent: () => import('./pages/product/product.component').then(m => m.ProductComponent), title: "Product",canActivate:[authGuard]},
+            { path: "categories", loadComponent: () => import('./pages/categories/categoris.component').then(m => m.CategorisComponent), title: "Categories",canActivate:[authGuard]},
+            { path: "brands", loadComponent: () => import('./pages/brands/brands.component').then(m => m.BrandsComponent), title: "Brands",canActivate:[authGuard]},
+            { path: "cart", loadComponent: () => import('./pages/cart/cart.component').then(m => m.CartComponent), title: "Cart",canActivate:[authGuard]},
+            { path: "details", loadComponent: () => import('./pages/details/details.component').then(m => m.DetailsComponent), title: "Details",canActivate:[authGuard]},
+            { path: "checkout/:id", loadComponent: () => import('./pages/checkout/checkout.component').then(m => m.CheckoutComponent), title: "Checkout",canActivate:[authGuard]},
+            { path: "allorders", loadComponent: () => import('./pages/all-orders/all-orders.component').then(m => m.AllOrdersComponent), title: "allorders",canActivate:[authGuard]}
         ]
     },
 

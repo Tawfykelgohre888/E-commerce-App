@@ -37,14 +37,14 @@ export class LoginComponent {
         next: (res) => {
           console.log(res);
           if (res.message == 'success') {
-            setTimeout(() => {
+            // setTimeout(() => {
               // save token
               localStorage.setItem('userToken', res.token);
               // decode token
               this.authService.saveUserData()
               // navigate to home 
               this.router.navigate(['/home']);
-            }, 500);
+            // }, 500);
             this.success = res.message;
           }
           this.isLoading = false;
