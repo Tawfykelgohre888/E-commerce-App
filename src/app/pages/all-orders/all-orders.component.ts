@@ -19,16 +19,16 @@ export class AllOrdersComponent implements OnInit {
 
   ngOnInit(): void {
     this.authService.saveUserData();
-    this.idUser = this.authService.userData._id;
+    this.idUser = this.authService.userData.id;
     console.log(this.idUser);
     this.getOrders();
   }
 
   getOrders(): void {
-    this.orderService.getAllProduct().subscribe({
+    this.orderService.getUserOrder(this.idUser).subscribe({
       next: (res) => {
         console.log(res);
-        this.arrayAllProducts = res
+        this.arrayAllProducts = res;
       },
       error: (err) => {
         console.log(err);
