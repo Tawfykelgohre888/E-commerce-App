@@ -15,10 +15,12 @@ import { CartService } from '../../core/service/cart/cart.service';
 import { ToastrService } from 'ngx-toastr';
 import { SearchPipe } from '../../core/search.pipe';
 import { FormsModule } from '@angular/forms';
+import { WishListService } from '../../core/service/wishList/wish-list.service';
+import { CurrencyPipe } from '@angular/common';
 
 @Component({
   selector: 'app-home',
-  imports: [CarouselModule, RouterLink, SearchPipe, FormsModule],
+  imports: [CarouselModule, RouterLink, SearchPipe, FormsModule, CurrencyPipe],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss',
 })
@@ -27,7 +29,7 @@ export class HomeComponent implements OnInit {
   private readonly categoriesService = inject(CategoriesService);
   private readonly cartService = inject(CartService);
   private readonly toastrService = inject(ToastrService);
-
+  private readonly wishListService = inject(WishListService);
   // product: Iproduct[] = [];
 
   Product: WritableSignal<Iproduct[]> = signal([]);
@@ -111,5 +113,18 @@ export class HomeComponent implements OnInit {
         this.toastrService.success(res.message, 'FRESH Cart');
       },
     });
+  }
+
+
+  addToWishList(id:string):void{
+    this.wishListService.addProductToWishList(id).subscribe({
+      next:(res)=>{
+        console.log(res);
+        this.toastrService.success(res.message, 'FRESH Cart');
+      },error:(err)=>{
+        console.log(err);
+        this.toastrService.error(err.error.message, 'FRESH Cart');
+      }
+    })
   }
 }

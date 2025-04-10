@@ -9,7 +9,6 @@ import { Observable } from 'rxjs';
 export class CartService {
   userToken: string = '';
 
-  // ✅ استبدال BehaviorSubject بـ WritableSignal
   cartCount: WritableSignal<number> = signal(0);
 
   constructor(

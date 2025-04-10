@@ -1,1 +1,80 @@
-<p>wish-list works!</p>
+<section class="mt-16 px-4 md:px-10">
+    <div class="max-w-7xl mx-auto">
+      <h2 class="font-bold text-3xl md:text-4xl text-center text-gray-800 mb-6">My Wishlist</h2>
+      
+      <!-- Search and Filter Bar -->
+      <div class="flex flex-col md:flex-row gap-4 mb-8">
+        <input
+          [(ngModel)]="text"
+          type="search"
+          class="flex-grow px-4 py-3 rounded-lg border border-gray-200 focus:outline-none focus:ring-2 focus:ring-green-500"
+          placeholder="Search in your wishlist"
+        />
+        <select class="px-4 py-3 rounded-lg border border-gray-200 focus:outline-none focus:ring-2 focus:ring-green-500 bg-white">
+          <option>Sort by</option>
+          <option>Price: Low to High</option>
+          <option>Price: High to Low</option>
+          <option>Recently Added</option>
+        </select>
+      </div>
+  
+      <!-- Wishlist Items Grid -->
+      <div class="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+        @for (item of product | search : text; track item.id) {
+        <div class="group relative border rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-all bg-white flex flex-col h-full">
+          <!-- Wishlist Badge -->
+          <!-- <button 
+            (click)="removeFromWishlist(item.id)"
+            class="absolute top-3 right-3 z-10 p-2 bg-white/90 rounded-full shadow hover:bg-red-50 transition"
+            aria-label="Remove from wishlist"
+          >
+            <i class="fas fa-heart text-red-500"></i>
+          </button> -->
+  
+          <!-- Product Image -->
+          <div class="cursor-pointer p-4 bg-gray-50" [routerLink]="['/details', item.id]">
+            <img
+              [src]="item.imageCover"
+              class="w-full h-48 object-contain transition-transform group-hover:scale-105"
+              [alt]="item.title"
+              loading="lazy"
+            />
+          </div>
+  
+          <!-- Product Info -->
+          <div class="p-4 flex-grow">
+            <h4 class="text-green-600 text-xs font-medium mb-1">{{ item.category?.name }}</h4>
+            <h3 class="font-medium text-gray-800 mb-2 line-clamp-2">{{ item.title }}</h3>
+            
+            <div class="flex justify-between items-center mt-auto">
+              <span class="font-semibold text-gray-900">{{ item.price | currency:'EGP ' }}</span>
+              <div class="flex items-center text-sm">
+                <i class="fas fa-star text-yellow-400 mr-1"></i>
+                <span class="text-gray-600">{{ item.ratingsAverage || '0' }}</span>
+              </div>
+            </div>
+          </div>
+  
+          <!-- Action Buttons -->
+          <div class="p-4 pt-0 border-t border-gray-100">
+            <button
+              (click)="addToCart(item.id)"
+              class="w-full bg-green-600 hover:bg-green-700 text-white py-2.5 px-4 rounded-lg font-medium transition flex items-center justify-center gap-2"
+            >
+              <i class="fas fa-shopping-cart text-sm"></i>
+              Add to Cart
+            </button>
+          </div>
+        </div>
+        } @empty {
+        <div class="col-span-full text-center py-12">
+          <i class="far fa-heart text-4xl text-gray-300 mb-4"></i>
+          <p class="text-gray-500">Your wishlist is empty</p>
+          <a routerLink="/products" class="mt-4 inline-block text-green-600 hover:text-green-700 font-medium">
+            Browse products →
+          </a>
+        </div>
+        }
+      </div>
+    </div>
+  </section>

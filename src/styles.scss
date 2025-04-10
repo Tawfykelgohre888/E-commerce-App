@@ -1,9 +1,7 @@
-@use 'ngx-toastr/toastr';
+@use "ngx-toastr/toastr";
 
-@use 'ngx-owl-carousel-o/lib/styles/scss/owl.carousel' as *;
-@use 'ngx-owl-carousel-o/lib/styles/scss/owl.theme.default' as *;
-
-
+@use "ngx-owl-carousel-o/lib/styles/scss/owl.carousel" as *;
+@use "ngx-owl-carousel-o/lib/styles/scss/owl.theme.default" as *;
 
 /* Tailwind CSS */
 @tailwind base;
@@ -11,9 +9,40 @@
 @tailwind utilities;
 
 .btn-main {
-    @apply bg-green-600 px-5 py-2 text-white rounded-2xl border hover:bg-green-800 transition-colors duration-500;
+  @apply bg-green-600 px-5 py-2 text-white rounded-2xl border hover:bg-green-800 transition-colors duration-500;
 }
 
 body {
-    font-family: "Assistant", sans-serif;
+  font-family: "Assistant", sans-serif;
 }
+
+.product {
+  position: relative;
+}
+
+.product:hover button {
+  bottom: 0;   
+}
+
+.product button {
+  position: absolute;
+  bottom: -60px; 
+  left: 0;
+  width: 100%;
+  transition: bottom 0.3s ease-in-out;
+}
+
+.product .heart {
+  position: absolute;
+  top: 10px;
+  right: -40px; 
+  font-size: 24px;
+  color: #ff4b4b;
+  transition: right 0.3s ease-in-out;
+  cursor: pointer;
+}
+
+.product:hover .heart {
+  right: 10px;    
+}
+
