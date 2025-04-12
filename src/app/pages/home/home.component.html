@@ -75,7 +75,8 @@
         <h4 class="text-green-600 text-xs mb-1">{{ pro.category.name }}</h4>
         <h3 class="font-medium text-gray-800 leading-tight mb-2">{{ pro.title.split(" ", 2).join(" ") }}</h3>
         <div class="flex justify-between items-center text-sm">
-          <span class="font-semibold text-gray-700">{{ pro.price }} EGP</span>
+          <span class="font-semibold text-gray-700">{{ pro.price | currency:'EGP':'code':'1.0-0' }}
+          </span>
           <div class="flex items-center">
             <i class="fas fa-star text-yellow-400 text-sm mr-1"></i>
             <span class="text-gray-600"> {{ pro.ratingsAverage }} </span>

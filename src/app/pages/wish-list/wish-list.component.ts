@@ -9,7 +9,7 @@ import { CurrencyPipe } from '@angular/common';
 
 @Component({
   selector: 'app-wish-list',
-  imports: [FormsModule, SearchPipe, RouterLink,CurrencyPipe],
+  imports: [FormsModule, SearchPipe, RouterLink, CurrencyPipe],
   templateUrl: './wish-list.component.html',
   styleUrl: './wish-list.component.scss',
 })
@@ -23,7 +23,8 @@ export class WishListComponent implements OnInit {
     this.wishListService.getLoggedUserWishlist().subscribe({
       next: (res) => {
         console.log(res.data);
-      this.product = res.data;
+        this.product = res.data;
+        this.wishListService.wishListCount.set(res.data.length);
       },
       error: (err) => {
         console.log(err);
@@ -41,4 +42,5 @@ export class WishListComponent implements OnInit {
       },
     });
   }
+  
 }

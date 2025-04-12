@@ -3,6 +3,7 @@ import { Component, inject, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ProductsService } from '../../core/service/products/products.service';
 import { CartService } from '../../core/service/cart/cart.service';
+import { ToastrService } from 'ngx-toastr';
 @Component({
   selector: 'app-details',
   templateUrl: './details.component.html',
@@ -12,6 +13,7 @@ export class DetailsComponent implements OnInit {
   private readonly activatedRoute = inject(ActivatedRoute);
   private readonly productsService = inject(ProductsService);
   private readonly cartService = inject(CartService);
+  private readonly toastrService = inject(ToastrService);
 
   detailsProduct: Iproduct | null = null;
 
@@ -48,10 +50,12 @@ export class DetailsComponent implements OnInit {
       next: (response) => {
         console.log('Product added to cart:', response);
         // Optionally: Show a success message to the user
+        this.toastrService.success(response.message, 'FRESH Cart');
       },
       error: (err) => {
         console.log('Error adding product to cart:', err);
         // Optionally: Show an error message to the user
+        this.toastrService.error(err.error.message, 'FRESH Cart');
       },
     });
   }

@@ -1,3 +1,4 @@
+import { WishListService } from './../../core/service/wishList/wish-list.service';
 import {
   Component,
   inject,
@@ -15,7 +16,6 @@ import { CartService } from '../../core/service/cart/cart.service';
 import { ToastrService } from 'ngx-toastr';
 import { SearchPipe } from '../../core/search.pipe';
 import { FormsModule } from '@angular/forms';
-import { WishListService } from '../../core/service/wishList/wish-list.service';
 import { CurrencyPipe } from '@angular/common';
 
 @Component({
@@ -38,8 +38,11 @@ export class HomeComponent implements OnInit {
 
   categories: WritableSignal<Icategories[]> = signal([]);
 
+  wishListCount: number = 0;
+
   cartItem: any = {};
   text: string = '';
+  isWishList: boolean = false;
 
   customMainSlider: OwlOptions = {
     loop: true,
@@ -99,7 +102,7 @@ export class HomeComponent implements OnInit {
   }
   ngOnInit(): void {
     this.getProductData();
-    this.getCategoriesData();
+    this.getCategoriesData();    
   }
 
   addToCart(id: string): void {
@@ -115,16 +118,27 @@ export class HomeComponent implements OnInit {
     });
   }
 
+  // getWishListCount(): void {
+  //   this.wishListService.getLoggedUserWishlist().subscribe({
+  //     next: (res) => {
+  //       this.wishListCount = res.data.length; // ass
+  //     },
+  //   })
+  // }
 
-  addToWishList(id:string):void{
+
+  addToWishList(id: string): void {
     this.wishListService.addProductToWishList(id).subscribe({
-      next:(res)=>{
+      next: (res) => {
         console.log(res);
+        
+        this.wishListService.wishListCount.set(res.data.length);
         this.toastrService.success(res.message, 'FRESH Cart');
-      },error:(err)=>{
+      },
+      error: (err) => {
         console.log(err);
         this.toastrService.error(err.error.message, 'FRESH Cart');
-      }
-    })
+      },
+    });
   }
 }

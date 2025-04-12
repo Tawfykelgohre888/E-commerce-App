@@ -1,8 +1,8 @@
+import { WishListService } from './../../core/service/wishList/wish-list.service';
 import { AuthService } from './../../core/service/auth/auth.service';
 import { Component, inject, Input, Signal, effect } from '@angular/core';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 import { CartService } from '../../core/service/cart/cart.service';
-import { WishListService } from '../../core/service/wishList/wish-list.service';
 
 @Component({
   selector: 'app-navbar',
@@ -17,6 +17,8 @@ export class NavbarComponent {
   readonly authService = inject(AuthService);
   readonly cartService = inject(CartService);
   readonly wishListService = inject(WishListService);
+
+  // this.wishListService = 
 
   countNumber: Signal<number> = this.cartService.cartCount;
 
