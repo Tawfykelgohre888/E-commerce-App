@@ -10,13 +10,14 @@ import { ProductsService } from '../../core/service/products/products.service';
 import { Iproduct } from '../../shared/interfaces/iproduct';
 import { CategoriesService } from '../../core/service/categories/categories.service';
 import { CarouselModule, OwlOptions } from 'ngx-owl-carousel-o';
-import { Icategories } from '../../shared/interfaces/icategories';
+import { icategories } from '../../shared/interfaces/icategories';
 import { RouterLink } from '@angular/router';
 import { CartService } from '../../core/service/cart/cart.service';
 import { ToastrService } from 'ngx-toastr';
 import { SearchPipe } from '../../core/search.pipe';
 import { FormsModule } from '@angular/forms';
 import { CurrencyPipe } from '@angular/common';
+import { Ibanners } from '../../shared/interfaces/ibanners';
 
 @Component({
   selector: 'app-home',
@@ -30,13 +31,19 @@ export class HomeComponent implements OnInit {
   private readonly cartService = inject(CartService);
   private readonly toastrService = inject(ToastrService);
   private readonly wishListService = inject(WishListService);
-  // product: Iproduct[] = [];
+  product: Iproduct[] = [];
+  baseImageUrl: string = 'https://app.verzasca.co/';
+  baseImageUrlCategory: string = 'https://apierp.verzasca.co/AppMedia/';
+  baseImageServer: string = 'https://apierp.verzasca.co/AppMedia/';
+  // defaultProductImage: string = '../../../../public/images/errorImg.png';
 
-  Product: WritableSignal<Iproduct[]> = signal([]);
+  banners: Ibanners[] = [];
+
+  // Product: WritableSignal<Iproduct[]> = signal([]);
 
   // categories: Icategories[] = [];
 
-  categories: WritableSignal<Icategories[]> = signal([]);
+  categories: WritableSignal<icategories[]> = signal([]);
 
   wishListCount: number = 0;
 
@@ -85,11 +92,17 @@ export class HomeComponent implements OnInit {
     },
     nav: false,
   };
+
+
   getProductData(): void {
-    this.productsService.getAllProduct().subscribe({
+    this.productsService.getServiceIsMostwanted().subscribe({
       next: (res) => {
-        this.Product.set(res.data);
-        // this.cartService.cartCount.next(res.numOfCartItems);
+        console.log(res.data);
+
+        this.product = res.data;
+      },
+      error: (err) => {
+        console.log(err);
       },
     });
   }
@@ -100,9 +113,24 @@ export class HomeComponent implements OnInit {
       },
     });
   }
+
+  getBanners(): void {
+    this.productsService.getBanners().subscribe({
+      next: (res) => {
+        this.banners = res.data;
+        console.log(res.data);
+      },
+    });
+  }
+
   ngOnInit(): void {
     this.getProductData();
-    this.getCategoriesData();    
+    this.getCategoriesData();
+    this.getBanners();
+  }
+
+  onImageError(event: any) {
+    event.target.src = 'images/errorImg.png'    ;
   }
 
   addToCart(id: string): void {
@@ -126,12 +154,11 @@ export class HomeComponent implements OnInit {
   //   })
   // }
 
-
   addToWishList(id: string): void {
     this.wishListService.addProductToWishList(id).subscribe({
       next: (res) => {
         console.log(res);
-        
+
         this.wishListService.wishListCount.set(res.data.length);
         this.toastrService.success(res.message, 'FRESH Cart');
       },

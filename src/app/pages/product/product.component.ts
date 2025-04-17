@@ -5,14 +5,14 @@ import { CategoriesService } from '../../core/service/categories/categories.serv
 import { CartService } from '../../core/service/cart/cart.service';
 import { ToastrService } from 'ngx-toastr';
 import { Iproduct } from '../../shared/interfaces/iproduct';
-import { Icategories } from '../../shared/interfaces/icategories';
+import { icategories } from '../../shared/interfaces/icategories';
 import { RouterLink } from '@angular/router';
 import { SearchPipe } from '../../core/search.pipe';
 import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-product',
-  imports: [RouterLink,  SearchPipe, FormsModule ],
+  imports: [RouterLink, SearchPipe, FormsModule],
   templateUrl: './product.component.html',
   styleUrl: './product.component.scss',
 })
@@ -22,13 +22,13 @@ export class ProductComponent {
   private readonly cartService = inject(CartService);
   private readonly toastrService = inject(ToastrService);
 
-  // product: Iproduct[] = [];
-
-  Product: WritableSignal<Iproduct[]> = signal([]);
+  product: Iproduct[] = [];
+  baseImageServer: string = 'https://apierp.verzasca.co/AppMedia/';
+  // Product: WritableSignal<Iproduct[]> = signal([]);
 
   // categories: Icategories[] = [];
 
-  categories: WritableSignal<Icategories[]> = signal([]);
+  categories: WritableSignal<icategories[]> = signal([]);
 
   cartItem: any = {};
 
@@ -76,23 +76,20 @@ export class ProductComponent {
     nav: false,
   };
   getProductData(): void {
-    this.productsService.getAllProduct().subscribe({
+    this.productsService.getServiceIsMostwanted().subscribe({
       next: (res) => {
-        this.Product.set(res.data);
-        // this.cartService.cartCount.next(res.numOfCartItems);
+        console.log(res.data);
+
+        this.product = res.data;
       },
-    });
-  }
-  getCategoriesData(): void {
-    this.categoriesService.getAllCategories().subscribe({
-      next: (res) => {
-        this.categories.set(res.data);
+      error: (err) => {
+        console.log(err);
       },
     });
   }
   ngOnInit(): void {
     this.getProductData();
-    this.getCategoriesData();
+    // this.getCategoriesData();
   }
 
   addToCart(id: string): void {

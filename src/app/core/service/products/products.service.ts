@@ -8,10 +8,14 @@ export class ProductsService {
   constructor(private httpClient:HttpClient) { }
 
 
-  getAllProduct():Observable<any>{
-   return  this.httpClient.get("https://ecommerce.routemisr.com/api/v1/products")
+  getServiceIsMostwanted():Observable<any>{
+    return this.httpClient.get('https://apierp.verzasca.co/api/Landing/GetServiceIsMostWanted')
   }
-  getspecificProducts(id:string):Observable<any>{
-   return  this.httpClient.get(`https://ecommerce.routemisr.com/api/v1/products/${id} `)
+  // getspecificProducts(id:string):Observable<any>{
+  //  return  this.httpClient.get(`https://ecommerce.routemisr.com/api/v1/products/${id} `)
+  // }
+
+  getBanners(): Observable<any> {
+    return this.httpClient.get('https://apierp.verzasca.co/api/Landing/GetBanners');
   }
 }

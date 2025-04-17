@@ -7,6 +7,9 @@ import { Pipe, PipeTransform } from '@angular/core';
 export class SearchPipe implements PipeTransform {
 
   transform(arrayOfObject:any[], klma:any ): any[] {
+    if(!arrayOfObject || !klma||klma==""){
+      return arrayOfObject
+    }
     
     return  arrayOfObject.filter((item)=> item.title.toLowerCase().includes(klma.toLowerCase()) ) ;
   }

@@ -1,6 +1,6 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { CategoriesService } from '../../core/service/categories/categories.service';
-import { Icategories } from '../../shared/interfaces/icategories';
+import { icategories} from '../../shared/interfaces/icategories';
 
 @Component({
   selector: 'app-categoris',
@@ -10,7 +10,8 @@ import { Icategories } from '../../shared/interfaces/icategories';
 })
 export class CategorisComponent implements OnInit {
   private readonly categoriesService = inject(CategoriesService);
-  categoryData: Icategories[] = [];
+  baseImageUrl: string = 'https://apierp.verzasca.co/AppMedia/';
+  categoryData: icategories[] = [];
 
   ngOnInit(): void {
     this.getCategory();
