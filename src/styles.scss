@@ -13,7 +13,7 @@
 }
 
 body {
-  font-family: "Assistant", sans-serif;
+    font-family: "Montserrat", sans-serif;
 }
 
 .product {
@@ -21,12 +21,12 @@ body {
 }
 
 .product:hover button {
-  bottom: 0;   
+  bottom: 0;
 }
 
 .product button {
   position: absolute;
-  bottom: -60px; 
+  bottom: -60px;
   left: 0;
   width: 100%;
   transition: bottom 0.3s ease-in-out;
@@ -35,7 +35,7 @@ body {
 .product .heart {
   position: absolute;
   top: 10px;
-  right: -40px; 
+  right: -40px;
   font-size: 24px;
   color: #ff4b4b;
   transition: right 0.3s ease-in-out;
@@ -43,6 +43,6 @@ body {
 }
 
 .product:hover .heart {
-  right: 10px;    
+  right: 10px;
 }
 

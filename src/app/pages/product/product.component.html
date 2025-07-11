@@ -6,30 +6,30 @@
   <p class="text-center text-lg text-gray-600 mb-12">
     Explore a wide variety of top-rated products handpicked just for you. Find the best deals and add your favorites to your cart today!
   </p>
-  
+
   <input [(ngModel)]="text" type="search" class="search-input px-4 py-2 my-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 w-full text-lg mb-6" placeholder="Search By Name">
-  
+
   <div class="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
-    @for (pro of product | search : text ; track pro.id) {
+    @for (pro of product | search : text ; track pro._id) {
     <div
       class="card border border-green-400/50 rounded-md overflow-hidden shadow-lg transition-all duration-300 transform hover:scale-105 hover:shadow-2xl"
     >
-      <div class="card-img" [routerLink]="['/details', pro.id]">
+      <div class="card-img" [routerLink]="['/details', pro._id]">
         <img
-          [src]="baseImageServer+pro.imageUrl"
-          class="w-full h-[250px] object-cover"
-          [alt]="pro?.name"
+          [src]="pro.imageCover"
+          class="w-full h-[250px] object-contain"
+          [alt]="pro.title"
         />
       </div>
       <div class="card-body px-4 py-6">
-        <h4 class="text-green-500 text-sm font-semibold">{{ pro?.serviceCategoryName}}</h4>
-        <h3 class="font-semibold text-lg mt-2 text-gray-900">{{ pro.shortDescriptionAr.split(" ", 2).join(" ") }}</h3>
+        <h4 class="text-green-500 text-sm font-semibold">{{ pro.title}}</h4>
+        <h3 class="font-semibold text-lg mt-2 text-gray-900">{{pro.description.split(' ',10).join(' ')}}</h3>
         <div class="flex justify-between items-center mt-4">
-          <span class="text-lg font-medium text-gray-900">{{ pro.price }} EGP</span>
-          <!-- <div class="flex items-center">
+          <span class="text-lg font-medium mr-1     text-gray-900">{{ pro.price | currency:'EGP' }} </span>
+          <div class="flex items-center">
             <i class="fas fa-star text-yellow-300"></i>
             <span class="text-gray-600 ml-1">{{ pro.ratingsAverage }}</span>
-          </div> -->
+          </div>
         </div>
       </div>
       <button

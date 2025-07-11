@@ -1,5 +1,8 @@
 export interface icategories {
-  id: number;
+  _id: string;
   name: string;
-  imageUrl: string;
+  slug: string;
+  image: string;
+  createdAt: string;
+  updatedAt: string;
 }

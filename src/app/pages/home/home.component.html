@@ -9,38 +9,30 @@
   </p>
 </section>
 
-<!-- Main Slider -->
-<section class="mt-20 px-4">
-  <div class="grid md:grid-cols-[70%_minmax(0,1fr)] gap-4">
-    <!-- Slider -->
-    <div>
-      <owl-carousel-o [options]="customMainSlider">
-        @for (banner of banners; track banner.id) {
-        <ng-template carouselSlide>
-          <img
-            [src]="baseImageUrl + banner.imageUrl"
-            class="w-full h-[485px] object-cover rounded-xl shadow-sm"
-            [alt]="banner.name"
-          />
-          <!-- <h3> {{banner.name}} </h3> -->
-        </ng-template>
-        }
-        <!-- Add more images as needed -->
-      </owl-carousel-o>
-    </div>
+  <!-- Main Slider -->
+  <section class="mt-20 px-4">
+    <div class="grid md:grid-cols-[70%_minmax(0,1fr)] gap-4">
+      <!-- Slider -->
+      <div>
+        <owl-carousel-o [options]="customMainSlider">
+          <ng-template carouselSlide>
+            <img src="assets/images/slider-image-1.jpeg" class="rounded-md h-full w-full " alt="bannerOne">
+          </ng-template>
+          <ng-template carouselSlide>
+            <img src="assets/images/slider-image-2.jpeg" class="rounded-md h-full w-full" alt="bannerTwo">
+          </ng-template>
+          <ng-template carouselSlide>
+            <img src="assets/images/slider-image-3.jpeg" class="rounded-md h-full w-full" alt="bannerThree">
+          </ng-template>
+        </owl-carousel-o>
+      </div>
 
-    <!-- Side banners -->
-    <div class="flex flex-col gap-[37px]">
-      <img
-        src="/images/grocery-banner.png"
-        class="w-full h-[223px] object-cover rounded-xl shadow-sm"
-        alt="Side Banner 1"
-      />
-      <img
-        src="/images/grocery-banner-2.jpeg"
-        class="w-full h-[223px] object-cover rounded-xl shadow-sm"
-        alt="Side Banner 2"
-      />
+    <!-- Side categoris -->
+    <div class="flex flex-col gap-[113px]">
+      <img src="assets/images/grocery-banner.png" class="w-full h-[223px] object-cover rounded-xl shadow-sm"
+        alt="Side Banner 1" />
+      <img src="assets/images/grocery-banner-2.jpeg" class="w-full h-[223px] object-cover rounded-xl shadow-sm"
+        alt="Side Banner 2" />
     </div>
   </div>
 </section>
@@ -51,16 +43,10 @@
     Shop Popular Categories
   </h2>
   <owl-carousel-o [options]="customOptions">
-    @for (cat of categories(); track cat.id) {
+    @for (cat of categories(); track cat._id) {
     <ng-template carouselSlide>
-      <div
-        class="text-center bg-white rounded-xl shadow-md hover:shadow-lg transition p-4"
-      >
-        <img
-          [src]="baseImageUrlCategory + cat.imageUrl"
-          class="w-full h-[180px] object-contain rounded-lg mb-3"
-          [alt]="cat.name"
-        />
+      <div class="text-center bg-white rounded-xl shadow-md hover:shadow-lg transition p-4">
+        <img [src]="cat.image" class="w-full h-[180px] object-contain rounded-lg mb-3" [alt]="cat.name" />
         <h3 class="text-lg font-semibold text-gray-700">{{ cat.name }}</h3>
       </div>
     </ng-template>
@@ -70,46 +56,34 @@
 
 <!-- Show All Products -->
 <section class="mt-20 px-6">
-  <input
-    [(ngModel)]="text"
-    type="search"
+  <input [(ngModel)]="text" type="search"
     class="search-input px-4 py-2 my-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 w-full text-lg mb-6"
-    placeholder="Search By Name"
-  />
+    placeholder="Search By Name" />
 
   <div class="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
-    @for (pro of product | search : text ; track pro.id) {
+    @for (pro of (product | search : text)?.slice(0,20); track pro.id) {
     <div
-      class="card border border-green-400/50 rounded-md overflow-hidden shadow-lg transition-all duration-300 transform hover:scale-105 hover:shadow-2xl"
-    >
+      class="card border border-green-400/50 rounded-md overflow-hidden shadow-lg transition-all duration-300 transform hover:scale-105 hover:shadow-2xl">
       <div class="card-img" [routerLink]="['/details', pro.id]">
-        <img
-          [src]="baseImageServer + pro.imageUrl"
-          class="w-full h-[250px] object-cover"
-          [alt]="pro?.name"
-        />
+        <img [src]="pro.imageCover" class="w-full h-[250px] object-cover" [alt]="pro.title" />
       </div>
       <div class="card-body px-4 py-6">
         <h4 class="text-green-500 text-sm font-semibold">
-          {{ pro?.serviceCategoryName }}
+          {{ pro.title }}
         </h4>
         <h3 class="font-semibold text-lg mt-2 text-gray-900">
-          {{ pro.shortDescriptionAr.split(" ", 2).join(" ") }}
+          {{ pro.description.split(" ", 2).join(" ") }}
         </h3>
         <div class="flex justify-between items-center mt-4">
-          <span class="text-lg font-medium text-gray-900"
-            >{{ pro.price }} EGP</span
-          >
-          <!-- <div class="flex items-center">
+          <span class="text-lg font-medium text-gray-900">{{ pro.price }} EGP</span>
+          <div class="flex items-center">
             <i class="fas fa-star text-yellow-300"></i>
             <span class="text-gray-600 ml-1">{{ pro.ratingsAverage }}</span>
-          </div> -->
+          </div>
         </div>
       </div>
-      <button
-        (click)="addToCart(pro.id)"
-        class="bg-green-600 text-white py-2 px-8 rounded-md block w-[90%] mx-auto mt-4 text-lg font-medium transition-all duration-300 hover:bg-green-700"
-      >
+      <button (click)="addToCart(pro.id)"
+        class="bg-green-600 text-white py-2 px-8 rounded-md block w-[90%] mx-auto mt-4 text-lg font-medium transition-all duration-300 hover:bg-green-700">
         ADD TO CART
       </button>
     </div>

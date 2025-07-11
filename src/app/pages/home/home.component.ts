@@ -16,12 +16,11 @@ import { CartService } from '../../core/service/cart/cart.service';
 import { ToastrService } from 'ngx-toastr';
 import { SearchPipe } from '../../core/search.pipe';
 import { FormsModule } from '@angular/forms';
-import { CurrencyPipe } from '@angular/common';
 import { Ibanners } from '../../shared/interfaces/ibanners';
 
 @Component({
   selector: 'app-home',
-  imports: [CarouselModule, RouterLink, SearchPipe, FormsModule, CurrencyPipe],
+  imports: [CarouselModule, RouterLink, SearchPipe, FormsModule, ],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss',
 })
@@ -32,16 +31,8 @@ export class HomeComponent implements OnInit {
   private readonly toastrService = inject(ToastrService);
   private readonly wishListService = inject(WishListService);
   product: Iproduct[] = [];
-  baseImageUrl: string = 'https://app.verzasca.co/';
-  baseImageUrlCategory: string = 'https://apierp.verzasca.co/AppMedia/';
-  baseImageServer: string = 'https://apierp.verzasca.co/AppMedia/';
-  // defaultProductImage: string = '../../../../public/images/errorImg.png';
-
+  baseImageUrlCategory: string = 'https://ecommerce.routemisr.com/';
   banners: Ibanners[] = [];
-
-  // Product: WritableSignal<Iproduct[]> = signal([]);
-
-  // categories: Icategories[] = [];
 
   categories: WritableSignal<icategories[]> = signal([]);
 
@@ -71,7 +62,7 @@ export class HomeComponent implements OnInit {
     dots: true,
     autoplay: true,
     autoplayTimeout: 3000,
-    navSpeed: 700,
+    navSpeed: 500,
     navText: [
       '<i class="fa-solid fa-arrow-left"></i>',
       '<i class="fa-solid fa-arrow-right"></i>',
@@ -94,39 +85,32 @@ export class HomeComponent implements OnInit {
   };
 
 
-  getProductData(): void {
-    this.productsService.getServiceIsMostwanted().subscribe({
-      next: (res) => {
-        console.log(res.data);
 
-        this.product = res.data;
-      },
-      error: (err) => {
-        console.log(err);
-      },
-    });
+
+  gitProductData():void{
+    this.productsService.gitAllProduct().subscribe({
+      next:(res)=>{
+        console.log(res.data);
+        this.product = res.data
+
+      }
+    })
   }
+
   getCategoriesData(): void {
     this.categoriesService.getAllCategories().subscribe({
       next: (res) => {
         this.categories.set(res.data);
+        console.log(res.data);
+
       },
     });
   }
 
-  getBanners(): void {
-    this.productsService.getBanners().subscribe({
-      next: (res) => {
-        this.banners = res.data;
-        console.log(res.data);
-      },
-    });
-  }
 
   ngOnInit(): void {
-    this.getProductData();
+    this.gitProductData();
     this.getCategoriesData();
-    this.getBanners();
   }
 
   onImageError(event: any) {
@@ -146,13 +130,13 @@ export class HomeComponent implements OnInit {
     });
   }
 
-  // getWishListCount(): void {
-  //   this.wishListService.getLoggedUserWishlist().subscribe({
-  //     next: (res) => {
-  //       this.wishListCount = res.data.length; // ass
-  //     },
-  //   })
-  // }
+  getWishListCount(): void {
+    this.wishListService.getLoggedUserWishlist().subscribe({
+      next: (res) => {
+        this.wishListCount = res.data.length; // ass
+      },
+    })
+  }
 
   addToWishList(id: string): void {
     this.wishListService.addProductToWishList(id).subscribe({
@@ -169,3 +153,7 @@ export class HomeComponent implements OnInit {
     });
   }
 }
+
+
+
+

@@ -11,14 +11,14 @@
 
   <!-- Categories Grid -->
   <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-    @for (category of categoryData; track category.id) {
+    @for (category of categoryData; track category._id) {
     <div
       (click)="getCategory()"
       class="max-w-sm hover:shadow-blue-400 bg-white border border-gray-200 rounded-lg hover:shadow-2xl transition-all duration-500 hover:scale-105 transform dark:bg-gray-800 dark:border-gray-700"
     >
       <img
         class="rounded-t-lg h-[300px] w-full object-cover"
-        [src]=" baseImageUrl + category.imageUrl"
+        [src]="category.image"
         [alt]="category.name"
       />
 

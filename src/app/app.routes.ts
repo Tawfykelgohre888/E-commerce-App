@@ -15,7 +15,7 @@ export const routes: Routes = [
             { path: "forgetPassword", loadComponent: () => import('./pages/forget-psssword/forget-psssword.component').then(m => m.ForgetPssswordComponent), title: "Forget Password" },
         ]
     },
-    
+
     {
         path: "", component: BlankLayoutComponent, children: [
             { path: "home", loadComponent: () => import('./pages/home/home.component').then(m => m.HomeComponent), title: "Home" }, // Home not authGuard
@@ -24,7 +24,7 @@ export const routes: Routes = [
             { path: "brands", loadComponent: () => import('./pages/brands/brands.component').then(m => m.BrandsComponent), title: "Brands"},
             { path: "cart", loadComponent: () => import('./pages/cart/cart.component').then(m => m.CartComponent), title: "Cart"},
             { path: "wishList", loadComponent: () => import('./pages/wish-list/wish-list.component').then(m => m.WishListComponent), title: "wishList"},
-            // { path: "details/:id", loadComponent: () => import('./pages/details/details.component').then(m => m.DetailsComponent), title: "Details"},
+            { path: "details/:id", loadComponent: () => import('./pages/details/details.component').then(m => m.DetailsComponent), title: "Details"},
             { path: "checkout/:id", loadComponent: () => import('./pages/checkout/checkout.component').then(m => m.CheckoutComponent), title: "Checkout"},
             { path: "allorders", loadComponent: () => import('./pages/all-orders/all-orders.component').then(m => m.AllOrdersComponent), title: "allorders"}
         ]

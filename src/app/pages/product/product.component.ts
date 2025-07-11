@@ -9,10 +9,11 @@ import { icategories } from '../../shared/interfaces/icategories';
 import { RouterLink } from '@angular/router';
 import { SearchPipe } from '../../core/search.pipe';
 import { FormsModule } from '@angular/forms';
+import { CurrencyPipe } from '@angular/common';
 
 @Component({
   selector: 'app-product',
-  imports: [RouterLink, SearchPipe, FormsModule],
+  imports: [RouterLink, SearchPipe, FormsModule,CurrencyPipe],
   templateUrl: './product.component.html',
   styleUrl: './product.component.scss',
 })
@@ -23,7 +24,7 @@ export class ProductComponent {
   private readonly toastrService = inject(ToastrService);
 
   product: Iproduct[] = [];
-  baseImageServer: string = 'https://apierp.verzasca.co/AppMedia/';
+  // baseImageServer: string = 'https://apierp.verzasca.co/AppMedia/';
   // Product: WritableSignal<Iproduct[]> = signal([]);
 
   // categories: Icategories[] = [];
@@ -75,21 +76,35 @@ export class ProductComponent {
     },
     nav: false,
   };
-  getProductData(): void {
-    this.productsService.getServiceIsMostwanted().subscribe({
-      next: (res) => {
-        console.log(res.data);
 
-        this.product = res.data;
-      },
-      error: (err) => {
+  getAllProduct():void{
+    this.productsService.gitAllProduct().subscribe({
+      next:(res)=>{
+        console.log(res.data);
+        this.product = res.data
+      },error:(err)=>{
         console.log(err);
-      },
-    });
+
+      }
+    })
   }
+
+  // getProductData(): void {
+  //   this.productsService.getServiceIsMostwanted().subscribe({
+  //     next: (res) => {
+  //       console.log(res.data);
+
+  //       this.product = res.data;
+  //     },
+  //     error: (err) => {
+  //       console.log(err);
+  //     },
+  //   });
+  // }
   ngOnInit(): void {
-    this.getProductData();
+    // this.getProductData();
     // this.getCategoriesData();
+    this.getAllProduct();
   }
 
   addToCart(id: string): void {

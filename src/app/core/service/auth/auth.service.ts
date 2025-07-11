@@ -20,7 +20,7 @@ export class AuthService {
   saveUserData(): void {
     const userToken = localStorage.getItem('userToken');
     console.log('User Token:', userToken);
-  
+
     if (userToken) {
       try {
         const decodedToken = jwtDecode(userToken);
@@ -36,7 +36,7 @@ export class AuthService {
   logOut(): void {
     localStorage.removeItem('userToken');
     this.userData = null;
-    // nvgation router
+    // navigate router
     this.router.navigate(['/login']);
   }
   setEmailVerify(data: object): Observable<any> {
